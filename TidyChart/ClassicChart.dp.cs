@@ -168,7 +168,9 @@ namespace TidyChart
             DependencyProperty.Register("UpdateInterval", typeof(int), typeof(ClassicChart), new PropertyMetadata(200));
 
 
-
+        /// <summary>
+        /// Legend name, when it is null or empty, the legend will not be showed.
+        /// </summary>
         public string LegendTitle
         {
             get { return (string)GetValue(LegendTitleProperty); }
