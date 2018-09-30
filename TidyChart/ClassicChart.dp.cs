@@ -126,7 +126,9 @@ namespace TidyChart
             DependencyProperty.Register("WaveThickness", typeof(double), typeof(ClassicChart), new PropertyMetadata(1.0));
 
 
-
+        /// <summary>
+        /// true ---- show grid; false ---- do not show grid.
+        /// </summary>
         public bool ShowGrid
         {
             get { return (bool)GetValue(ShowGridProperty); }
@@ -136,6 +138,34 @@ namespace TidyChart
         // Using a DependencyProperty as the backing store for ShowGrid.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowGridProperty =
             DependencyProperty.Register("ShowGrid", typeof(bool), typeof(ClassicChart), new PropertyMetadata(true));
+
+
+        /// <summary>
+        /// true --- auto to updating the ui;false ---- manual.
+        /// </summary>
+        public bool AutoUpdateUi
+        {
+            get { return (bool)GetValue(AutoUpdateUiProperty); }
+            set { SetValue(AutoUpdateUiProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AutoUpdateUi.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AutoUpdateUiProperty =
+            DependencyProperty.Register("AutoUpdateUi", typeof(bool), typeof(ClassicChart), new PropertyMetadata(false));
+
+
+        /// <summary>
+        /// AutoUpdate interval, ms.
+        /// </summary>
+        public int UpdateInterval
+        {
+            get { return (int)GetValue(UpdateIntervalProperty); }
+            set { SetValue(UpdateIntervalProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for UpdateInterval.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty UpdateIntervalProperty =
+            DependencyProperty.Register("UpdateInterval", typeof(int), typeof(ClassicChart), new PropertyMetadata(200));
 
 
     }

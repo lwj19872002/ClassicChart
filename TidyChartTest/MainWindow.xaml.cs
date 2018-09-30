@@ -34,10 +34,15 @@ namespace TidyChartTest
 
             _timer = new Timer(200);
             _timer.Elapsed += _timer_Elapsed;
-            _timer.Start();
+            //_timer.Start();
         }
 
         private void _timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            NewSomeDatas();
+        }
+
+        private void NewSomeDatas()
         {
             Random rd = new Random();
             int num = rd.Next(400, 500);
@@ -53,15 +58,22 @@ namespace TidyChartTest
 
                     this.chart.UpdateAllUIDatas();
                 });
-                
+
             }
-            catch{
-                
+            catch {
+
             }
         }
 
+
         private void btnDraw_Click(object sender, RoutedEventArgs e)
         {
+            NewSomeDatas();
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            _vm.WaveDatas.Clear();
             this.chart.UpdateAllUIDatas();
         }
     }

@@ -15,6 +15,8 @@
         <StackPanel Grid.Row="0">
             <Button x:Name="btnDraw" Content="画线" Margin="10" FontSize="20"
                     Click="btnDraw_Click"/>
+            <Button x:Name="btnClear" Content="清除" Margin="10" FontSize="20"
+                    Click="btnClear_Click"/>
         </StackPanel>
         <tc:ClassicChart x:Name="chart" WaveForeground="Blue" Grid.Row="1"
                          MinXAxis="0.0" MaxXAxis="150.0" MinYAxis="0.0" MaxYAxis="150.0"

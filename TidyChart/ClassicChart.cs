@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -21,6 +22,8 @@ namespace TidyChart
         private List<Visual> _visuals;
         private DrawingVisual _waveLayer;
         private DrawingVisual _backgroundLayer;
+        private Timer _updateTimer;
+        private int _updateTimeFlag;
 
         public ClassicChart()
         {
@@ -30,8 +33,48 @@ namespace TidyChart
             _waveLayer = new DrawingVisual();
             AddVisual(_backgroundLayer);
             AddVisual(_waveLayer);
+
+            _updateTimeFlag = 0;
+            _updateTimer = new Timer(100);
+            _updateTimer.Elapsed += _updateTimer_Elapsed;
+            _updateTimer.Start();
         }
-        
+
+        private void _updateTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            try
+            {
+                this.Dispatcher.Invoke(() =>
+                {
+                    int flag;
+
+                    if (!AutoUpdateUi)
+                    {
+                        return;
+                    }
+                    _updateTimeFlag++;
+
+                    if (UpdateInterval < 100)
+                    {
+                        flag = 1;
+                    }
+                    else
+                    {
+                        flag = (UpdateInterval + 99) / 100;
+                    }
+
+                    if (_updateTimeFlag >= flag)
+                    {
+                        DrawBackGround(_backgroundLayer);
+                        DrawWaveLayer(_waveLayer);
+
+                        _updateTimeFlag = 0;
+                    }
+                });
+            }
+            catch{}
+        }
+
         private void DrawBackGround(DrawingVisual dv)
         {
             Pen axisLinePen = new Pen(new SolidColorBrush(Colors.Black), AxisLineThickness);
@@ -45,7 +88,7 @@ namespace TidyChart
             double maxY = MaxYAxis;
             if (AutoAxis)
             {
-                if(DataSource != null)
+                if((DataSource != null) && (DataSource.Count > 1))
                 {
                     minX = DataSource.Min(x => x.X);
                     maxX = DataSource.Max(x => x.X);
@@ -134,7 +177,7 @@ namespace TidyChart
             double maxX = MaxXAxis;
             double minY = MinYAxis;
             double maxY = MaxYAxis;
-            if (AutoAxis)
+            if (AutoAxis && (DataSource.Count > 1))
             {
                 minX = DataSource.Min(x => x.X);
                 maxX = DataSource.Max(x => x.X);
@@ -148,25 +191,20 @@ namespace TidyChart
             Pen p = new Pen(WaveForeground, WaveThickness);
             DrawingContext dc = dv.RenderOpen();
 
-            for (int i = 1; i < (DataSource.Count); i++)
+            if (DataSource.Count > 1)
             {
-                Point startP = new Point(waveWidth * ((DataSource[i - 1].X - minX) / (maxX - minX)) + AxisYWidth + AxisLineThickness,
-                                            waveHeight * ((DataSource[i - 1].Y - minY) / (maxY - minY)));
-                Point endP = new Point(waveWidth * ((DataSource[i].X - minX) / (maxX - minX)) + AxisYWidth + AxisLineThickness,
-                                            waveHeight * ((DataSource[i].Y - minY) / (maxY - minY)));
+                for (int i = 1; i < (DataSource.Count); i++)
+                {
+                    Point startP = new Point(waveWidth * ((DataSource[i - 1].X - minX) / (maxX - minX)) + AxisYWidth + AxisLineThickness,
+                                                waveHeight * ((DataSource[i - 1].Y - minY) / (maxY - minY)));
+                    Point endP = new Point(waveWidth * ((DataSource[i].X - minX) / (maxX - minX)) + AxisYWidth + AxisLineThickness,
+                                                waveHeight * ((DataSource[i].Y - minY) / (maxY - minY)));
 
-                dc.DrawLine(p, startP, endP);
+                    dc.DrawLine(p, startP, endP);
+                }
             }
-
+            
             dc.Close();
-        }
-
-        protected override void OnRender(DrawingContext dc)
-        {
-            base.OnRender(dc);
-
-            DrawBackGround(_backgroundLayer);
-            DrawWaveLayer(_waveLayer);
         }
 
         public void UpdateAllUIDatas()
@@ -187,6 +225,14 @@ namespace TidyChart
             this._visuals.Remove(visual);
             base.RemoveVisualChild(visual);
             base.RemoveLogicalChild(visual);
+        }
+
+        protected override void OnRender(DrawingContext dc)
+        {
+            base.OnRender(dc);
+
+            DrawBackGround(_backgroundLayer);
+            DrawWaveLayer(_waveLayer);
         }
 
         protected override int VisualChildrenCount => this._visuals.Count;
