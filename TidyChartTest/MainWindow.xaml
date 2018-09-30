@@ -21,6 +21,7 @@
         <tc:ClassicChart x:Name="chart" WaveForeground="Blue" Grid.Row="1"
                          MinXAxis="0.0" MaxXAxis="150.0" MinYAxis="0.0" MaxYAxis="150.0"
                          WaveThickness="2" ShowGrid="True"
+                         LegendTitle="Flow"
                          DataSource="{Binding WaveDatas}" Margin="5"/>
     </Grid>
 </Window>

@@ -22,6 +22,8 @@ namespace TidyChart
         private List<Visual> _visuals;
         private DrawingVisual _waveLayer;
         private DrawingVisual _backgroundLayer;
+        private DrawingVisual _foregroundLayer;
+
         private Timer _updateTimer;
         private int _updateTimeFlag;
 
@@ -31,13 +33,16 @@ namespace TidyChart
             
             _backgroundLayer = new DrawingVisual();
             _waveLayer = new DrawingVisual();
+            _foregroundLayer = new DrawingVisual();
+
             AddVisual(_backgroundLayer);
             AddVisual(_waveLayer);
+            AddVisual(_foregroundLayer);
 
             _updateTimeFlag = 0;
             _updateTimer = new Timer(100);
             _updateTimer.Elapsed += _updateTimer_Elapsed;
-            _updateTimer.Start();
+            //_updateTimer.Start();
         }
 
         private void _updateTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -67,6 +72,7 @@ namespace TidyChart
                     {
                         DrawBackGround(_backgroundLayer);
                         DrawWaveLayer(_waveLayer);
+                        DrawForeGroundLayer(_foregroundLayer);
 
                         _updateTimeFlag = 0;
                     }
@@ -79,7 +85,7 @@ namespace TidyChart
         {
             Pen axisLinePen = new Pen(new SolidColorBrush(Colors.Black), AxisLineThickness);
             Pen gridLinePen = new Pen(new SolidColorBrush(Colors.Gray), GirdLineThickness);
-
+            
             DrawingContext dc = dv.RenderOpen();
 
             double minX = MinXAxis;
@@ -207,10 +213,43 @@ namespace TidyChart
             dc.Close();
         }
 
+        private void DrawForeGroundLayer(DrawingVisual dv)
+        {
+            Pen lp = new Pen(WaveForeground, 3);
+            DrawingContext dc = dv.RenderOpen();
+            if (!string.IsNullOrEmpty(LegendTitle))
+            {
+                int textLen = LegendTitle.Length;
+                int rectWidth = 20 + 10 + 5 + textLen * 5;
+                int rectRight = 5;
+                int rectAllWidth = rectWidth + rectRight * 2;
+                int rectHeidht = 20;
+                int rectTop = 15;
+                int legendTextSize = 10;
+
+                if ((this.ActualWidth >= rectAllWidth) && (this.ActualHeight >= (rectHeidht + rectTop)))
+                {
+                    Rect rc = new Rect(new Point(this.ActualWidth - (rectWidth + rectRight), rectTop), new Point(this.ActualWidth - rectRight, (rectTop + rectHeidht)));
+                    dc.DrawRectangle(null, new Pen(new SolidColorBrush(Colors.Black), 1), rc);
+
+                    Point startP = new Point(this.ActualWidth - (rectWidth + rectRight) + 5, (rectTop + rectHeidht / 2));
+                    Point endP = new Point(this.ActualWidth - (rectWidth + rectRight) + 25, (rectTop + rectHeidht / 2));
+                    dc.DrawLine(lp, startP, endP);
+
+                    FormattedText ft = new FormattedText(LegendTitle, CultureInfo.GetCultureInfo("en-us"), FlowDirection.LeftToRight,
+                                                          new Typeface(new FontFamily("Arial"), FontStyles.Normal, FontWeights.Normal, FontStretches.Normal),
+                                                          legendTextSize, new SolidColorBrush(Colors.Black));
+                    dc.DrawText(ft, new Point(this.ActualWidth - (rectWidth + rectRight) + 30, (rectTop + rectHeidht / 2 - legendTextSize / 2)));
+                }
+            }
+            dc.Close();
+        }
+
         public void UpdateAllUIDatas()
         {
             DrawBackGround(_backgroundLayer);
             DrawWaveLayer(_waveLayer);
+            DrawForeGroundLayer(_foregroundLayer);
         }
 
         public void AddVisual(Visual visual)
@@ -233,6 +272,7 @@ namespace TidyChart
 
             DrawBackGround(_backgroundLayer);
             DrawWaveLayer(_waveLayer);
+            DrawForeGroundLayer(_foregroundLayer);
         }
 
         protected override int VisualChildrenCount => this._visuals.Count;

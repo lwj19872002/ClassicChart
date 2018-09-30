@@ -168,5 +168,17 @@ namespace TidyChart
             DependencyProperty.Register("UpdateInterval", typeof(int), typeof(ClassicChart), new PropertyMetadata(200));
 
 
+
+        public string LegendTitle
+        {
+            get { return (string)GetValue(LegendTitleProperty); }
+            set { SetValue(LegendTitleProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for LegendTitle.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LegendTitleProperty =
+            DependencyProperty.Register("LegendTitle", typeof(string), typeof(ClassicChart), new PropertyMetadata(""));
+
+
     }
 }
