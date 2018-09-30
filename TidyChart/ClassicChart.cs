@@ -10,11 +10,12 @@ using System.Windows.Media;
 
 namespace TidyChart
 {
-    public partial class ClassicChart : Canvas
+    public partial class ClassicChart : Panel
     {
         private const int AxisYWidth = 20;
         private const int AxisXHeight = 10;
         private const int AxisLineThickness = 2;
+        private const int GirdLineThickness = 1;
         private const int AxisScaleNum = 6;
 
         private List<Visual> _visuals;
@@ -34,7 +35,8 @@ namespace TidyChart
         private void DrawBackGround(DrawingVisual dv)
         {
             Pen axisLinePen = new Pen(new SolidColorBrush(Colors.Black), AxisLineThickness);
-            
+            Pen gridLinePen = new Pen(new SolidColorBrush(Colors.Gray), GirdLineThickness);
+
             DrawingContext dc = dv.RenderOpen();
 
             double minX = MinXAxis;
@@ -66,7 +68,16 @@ namespace TidyChart
             {
                 // Draw Axis X
                 dc.DrawLine(axisLinePen, new Point(AxisYWidth + i * axisXScale, waveHeight), 
-                            new Point(AxisYWidth + i * axisXScale, waveHeight + 5));
+                            new Point(AxisYWidth + i * axisXScale, waveHeight + AxisXHeight / 2));
+                if (ShowGrid)
+                {
+                    if (i != 0)
+                    {
+                        dc.DrawLine(gridLinePen, new Point(AxisYWidth + i * axisXScale, waveHeight),
+                                    new Point(AxisYWidth + i * axisXScale, 0));
+                    }
+                }
+
                 // Draw scale value of X
                 double curScaleValue = minX + i * ((maxX - minX) / AxisScaleNum);
                 string str = string.Format("{0:0}", curScaleValue);
@@ -82,10 +93,18 @@ namespace TidyChart
                 {
                     dc.DrawText(ft, new Point(AxisYWidth + i * axisXScale + 2, waveHeight + 1));
                 }
-                
+
                 // Draw Axis Y
                 dc.DrawLine(axisLinePen, new Point(AxisYWidth, waveHeight - i * axisYScale),
-                            new Point(AxisYWidth - 5, waveHeight - i * axisYScale));
+                            new Point(AxisYWidth / 2, waveHeight - i * axisYScale));
+                if (ShowGrid)
+                {
+                    if (i != 0)
+                    {
+                        dc.DrawLine(gridLinePen, new Point(AxisYWidth, waveHeight - i * axisYScale),
+                                    new Point(this.ActualWidth, waveHeight - i * axisYScale));
+                    }
+                }
                 // Draw scale value of Y
                 curScaleValue = minY + i * ((maxY - minY) / AxisScaleNum);
                 str = string.Format("{0:0}", curScaleValue);

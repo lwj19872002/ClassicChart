@@ -16,9 +16,9 @@
             <Button x:Name="btnDraw" Content="画线" Margin="10" FontSize="20"
                     Click="btnDraw_Click"/>
         </StackPanel>
-        <tc:ClassicChart x:Name="chart" WaveForeground="Blue" Background="LightCyan" Grid.Row="1"
+        <tc:ClassicChart x:Name="chart" WaveForeground="Blue" Grid.Row="1"
                          MinXAxis="0.0" MaxXAxis="150.0" MinYAxis="0.0" MaxYAxis="150.0"
-                         WaveThickness="2"
-                         DataSource="{Binding WaveDatas}" Margin="2"/>
+                         WaveThickness="2" ShowGrid="True"
+                         DataSource="{Binding WaveDatas}" Margin="5"/>
     </Grid>
 </Window>

@@ -126,5 +126,17 @@ namespace TidyChart
             DependencyProperty.Register("WaveThickness", typeof(double), typeof(ClassicChart), new PropertyMetadata(1.0));
 
 
+
+        public bool ShowGrid
+        {
+            get { return (bool)GetValue(ShowGridProperty); }
+            set { SetValue(ShowGridProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ShowGrid.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ShowGridProperty =
+            DependencyProperty.Register("ShowGrid", typeof(bool), typeof(ClassicChart), new PropertyMetadata(true));
+
+
     }
 }
