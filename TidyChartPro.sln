@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TidyChartPro", "TidyChartPro\TidyChartPro.csproj", "{FB9BA1C0-7A1D-42C2-8DA2-C9858FA7584E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TidyChart", "TidyChart\TidyChart.csproj", "{96F26C85-3AD9-4338-9A64-E8D38D34BACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TidyChartTest", "TidyChartTest\TidyChartTest.csproj", "{CBF1B9BC-E4C8-4A57-BF46-1973EED37782}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FB9BA1C0-7A1D-42C2-8DA2-C9858FA7584E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB9BA1C0-7A1D-42C2-8DA2-C9858FA7584E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB9BA1C0-7A1D-42C2-8DA2-C9858FA7584E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB9BA1C0-7A1D-42C2-8DA2-C9858FA7584E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96F26C85-3AD9-4338-9A64-E8D38D34BACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96F26C85-3AD9-4338-9A64-E8D38D34BACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96F26C85-3AD9-4338-9A64-E8D38D34BACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96F26C85-3AD9-4338-9A64-E8D38D34BACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBF1B9BC-E4C8-4A57-BF46-1973EED37782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBF1B9BC-E4C8-4A57-BF46-1973EED37782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBF1B9BC-E4C8-4A57-BF46-1973EED37782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBF1B9BC-E4C8-4A57-BF46-1973EED37782}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

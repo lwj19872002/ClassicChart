@@ -1,0 +1,23 @@
+﻿<Window x:Class="TidyChartTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TidyChartTest"
+        xmlns:tc ="clr-namespace:TidyChart;assembly=TidyChart"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <Button x:Name="btnDraw" Content="画线" Margin="10" FontSize="20"
+                    Click="btnDraw_Click"/>
+        </StackPanel>
+        <tc:ClassicChart x:Name="chart" WaveForeground="Blue" Grid.Row="1"
+                         MinXAxis="0.0" MaxXAxis="150.0" MinYAxis="0.0" MaxYAxis="150.0"
+                         DataSource="{Binding WaveDatas}" Margin="5"/>
+    </Grid>
+</Window>
