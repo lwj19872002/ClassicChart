@@ -51,7 +51,7 @@ namespace TidyChartTest
                         _vm.WaveDatas.Add(new Point(i, rd.Next(-200, 200)));
                     }
 
-                    this.chart.DrawSomeThing();
+                    this.chart.UpdateAllUIDatas();
                 });
                 
             }
@@ -62,7 +62,7 @@ namespace TidyChartTest
 
         private void btnDraw_Click(object sender, RoutedEventArgs e)
         {
-            this.chart.DrawSomeThing();
+            this.chart.UpdateAllUIDatas();
         }
     }
 }

@@ -12,7 +12,9 @@ namespace TidyChart
     public partial class ClassicChart
     {
 
-
+        /// <summary>
+        /// Color of wave line
+        /// </summary>
         public Brush WaveForeground
         {
             get { return (Brush)GetValue(WaveForegroundProperty); }
@@ -23,9 +25,10 @@ namespace TidyChart
         public static readonly DependencyProperty WaveForegroundProperty =
             DependencyProperty.Register("WaveForeground", typeof(Brush), typeof(ClassicChart), new PropertyMetadata(new SolidColorBrush(Colors.Green)));
 
-
-
-
+        
+        /// <summary>
+        /// Min value of axis Y
+        /// </summary>
         public double MinYAxis
         {
             get { return (double)GetValue(MinYAxisProperty); }
@@ -37,7 +40,9 @@ namespace TidyChart
             DependencyProperty.Register("MinYAxis", typeof(double), typeof(ClassicChart), new PropertyMetadata(0.0));
 
 
-
+        /// <summary>
+        /// Max value of axis Y
+        /// </summary>
         public double MaxYAxis
         {
             get { return (double)GetValue(MaxYAxisProperty); }
@@ -50,7 +55,9 @@ namespace TidyChart
 
 
 
-
+        /// <summary>
+        /// Min value of axis X
+        /// </summary>
         public double MinXAxis
         {
             get { return (double)GetValue(MinXAxisProperty); }
@@ -62,7 +69,9 @@ namespace TidyChart
             DependencyProperty.Register("MinXAxis", typeof(double), typeof(ClassicChart), new PropertyMetadata(0.0));
 
 
-
+        /// <summary>
+        /// Max value of axis X
+        /// </summary>
         public double MaxXAxis
         {
             get { return (double)GetValue(MaxXAxisProperty); }
@@ -75,7 +84,9 @@ namespace TidyChart
 
 
 
-
+        /// <summary>
+        /// Data source
+        /// </summary>
         public List<Point> DataSource
         {
             get { return (List<Point>)GetValue(DataSourceProperty); }
@@ -87,7 +98,9 @@ namespace TidyChart
             DependencyProperty.Register("DataSource", typeof(List<Point>), typeof(ClassicChart), new PropertyMetadata(null));
 
 
-
+        /// <summary>
+        /// Auto calculate axis scale. when true, MinXAxis MaxXAxis MinYAxis MaxYAxis are calculated automatically, according to the DataSource.
+        /// </summary>
         public bool AutoAxis
         {
             get { return (bool)GetValue(AutoAxisProperty); }
@@ -97,6 +110,20 @@ namespace TidyChart
         // Using a DependencyProperty as the backing store for AutoAxis.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty AutoAxisProperty =
             DependencyProperty.Register("AutoAxis", typeof(bool), typeof(ClassicChart), new PropertyMetadata(true));
+
+
+        /// <summary>
+        /// Thickness of wave line.
+        /// </summary>
+        public double WaveThickness
+        {
+            get { return (double)GetValue(WaveThicknessProperty); }
+            set { SetValue(WaveThicknessProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for WaveThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty WaveThicknessProperty =
+            DependencyProperty.Register("WaveThickness", typeof(double), typeof(ClassicChart), new PropertyMetadata(1.0));
 
 
     }

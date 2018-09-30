@@ -126,7 +126,7 @@ namespace TidyChart
             double waveWidth = this.ActualWidth - AxisYWidth - AxisLineThickness;
             double waveHeight = this.ActualHeight - AxisXHeight - AxisLineThickness;
 
-            Pen p = new Pen(WaveForeground, 2);
+            Pen p = new Pen(WaveForeground, WaveThickness);
             DrawingContext dc = dv.RenderOpen();
 
             for (int i = 1; i < (DataSource.Count); i++)
@@ -150,7 +150,7 @@ namespace TidyChart
             DrawWaveLayer(_waveLayer);
         }
 
-        public void DrawSomeThing()
+        public void UpdateAllUIDatas()
         {
             DrawBackGround(_backgroundLayer);
             DrawWaveLayer(_waveLayer);
