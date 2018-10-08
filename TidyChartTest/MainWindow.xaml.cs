@@ -53,10 +53,11 @@ namespace TidyChartTest
                     _vm.WaveDatas.Clear();
                     for (int i = 0; i < num; i++)
                     {
-                        _vm.WaveDatas.Add(new Point(i, rd.Next(-200, 200)));
+                        //_vm.WaveDatas.Add(new Point(i, rd.Next(-200, 200)));
+                        _vm.WaveDatas.Add(new Point(i, i));
                     }
 
-                    //this.chart.UpdateAllUIDatas();
+                    this.chart.UpdateAllUIDatas();
                 });
 
             }
@@ -74,7 +75,7 @@ namespace TidyChartTest
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             _vm.WaveDatas.Clear();
-            //this.chart.UpdateAllUIDatas();
+            this.chart.UpdateAllUIDatas();
         }
     }
 }

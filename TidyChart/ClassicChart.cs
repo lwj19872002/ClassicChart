@@ -202,9 +202,9 @@ namespace TidyChart
                 for (int i = 1; i < (DataSource.Count); i++)
                 {
                     Point startP = new Point(waveWidth * ((DataSource[i - 1].X - minX) / (maxX - minX)) + AxisYWidth + AxisLineThickness,
-                                                waveHeight * ((DataSource[i - 1].Y - minY) / (maxY - minY)));
+                                                waveHeight * (1 - (DataSource[i - 1].Y - minY) / (maxY - minY)));
                     Point endP = new Point(waveWidth * ((DataSource[i].X - minX) / (maxX - minX)) + AxisYWidth + AxisLineThickness,
-                                                waveHeight * ((DataSource[i].Y - minY) / (maxY - minY)));
+                                                waveHeight * (1 - (DataSource[i].Y - minY) / (maxY - minY)));
 
                     dc.DrawLine(p, startP, endP);
                 }
